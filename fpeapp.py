@@ -153,13 +153,13 @@ with st.container():
         )
         Remarks = st.text_area("REMARKS")
         Surgical_Operation = st.text_area("Description of Surgical Operation:")
-        submitted = st.form_submit_button("Submit")
+       
         if submitted:
             folder_path = "saved_forms"
             os.makedirs(folder_path, exist_ok=True)
             now = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
             file_path = os.path.join("folder_path", f"{lastname}_{firstname}_{now}.txt")
-            with open("file_path", "w") as f:
+           
                 f.write(f"lastname: {lastname}\n")
                 f.write(f"firstname: {firstname}\n")
                 f.write(f"middlename: {middlename}\n")
@@ -189,5 +189,11 @@ with st.container():
                 folder_path = "./saved_forms"
             if not os.path.exists("tempDir"):
                 os.makedirs("tempDir")
-                st.success(f"Form saved to {file_path}")
-            st.rerun()
+                st.success("Form submitted! Click below to download.")
+
+                st.download_button(
+                label="📥 Download Form",
+                data=content,
+                file_name=f"{lastname}_{firstname}_{now}.txt",
+                mime="text/plain"
+                st.rerun()
